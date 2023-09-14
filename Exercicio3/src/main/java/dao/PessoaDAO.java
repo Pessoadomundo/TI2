@@ -128,21 +128,21 @@ public class PessoaDAO {
 		return elemento;
 	}
 	private List<Pessoa> get(String orderBy) {
-		List<Pessoa> produtos = new ArrayList<Pessoa>();
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM produto" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM pessoa" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);	           
 	        while(rs.next()) {	            	
 	        	Pessoa p = new Pessoa(rs.getInt("id"), rs.getString("nome"), rs.getInt("altura"), rs.getInt("peso"));
-	            produtos.add(p);
+	            pessoas.add(p);
 	        }
 	        st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return produtos;
+		return pessoas;
 	}
 
 	public List<Pessoa> get() {
